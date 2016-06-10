@@ -1,4 +1,4 @@
-#Python Scraper for ESPN NBA Data
+#Python Scraper for ESPN NCAAF Data
 
 
 import requests
@@ -74,7 +74,7 @@ def is_result(string):
 
 def parse_distance(string):
 	"""
-	Get the distance from a report line. Example: an input "25-foot jumper"
+	Get the distance from a report line. Example: an input "25-yard catch"
 	should result in an output 25 (an integer).
 	Input:
 		string: a string to be analyzed
@@ -186,10 +186,10 @@ def get_game_ids(team_id, year):
 		"home" or "away" in the second place.
 	"""
 	
-	url = "http://espn.go.com/nba/team/schedule/_/name/%s/year/%d/" % (team_id, year)
+	url = "http://espn.go.com/college-football/scoreboard" % (team_id, year)
 	soup = soup_link(url)
 
-	gameid_pattern = "/nba/recap"
+	gameid_pattern = "/fbc/recap"
 	game_elements = soup.find_all('a', href=re.compile(gameid_pattern))
 
 	list_game_ids = []
@@ -226,7 +226,7 @@ def get_players(team_id, year):
 		a list of strings that are the players' names
 	"""
 	
-	url = "http://espn.go.com/nba/team/stats/_/name/%s/year/%d/" %(team_id, year)
+	url = "http://espn.go.com/college-football/scoreboard" %(team_id, year)
 	response = requests.get(url)
 	html_text = response.content
 	soup = BeautifulSoup(html_text)
@@ -277,30 +277,31 @@ def extract_gamelog_row(row, list_players):
 				info_dict["home_or_away"] = "away"
 
 			info_dict["player"] = get_player_in_action(text, list_players)
-			info_dict["shot_success"] = parse_shot_success(text)
+			info_dict["score_success"] = parse_score_success(text)
 
-			if info_dict["shot_success"] == "scores":
+			if info_dict["score_success"] == "scores":
 				info_dict["points_scored"] = parse_points_scored(text)
 			else:
 				info_dict["points_scored"] = 0
 
-			info_dict["dunk"] =  is_shot_type(text, "dunk")
-			info_dict["layup"] = is_shot_type(text, "layup")
-			info_dict["free_throw"] = is_shot_type(text, "free_throw")
+			info_dict["touchdown"] =  is_score_type(text, "touchdown")
+			info_dict["P.A.T"] = is_score_type(text, "P.A.T")
+			info_dict["fieldgoal"] = is_score_type(text, "fieldgoal")
+			info_dict["safety"] = is_score_type(text, "safety")
 
 			# distance
 			info_dict["distance"] = parse_distance(text)
 
-			# certain shot types are assigned a fixed distance
+			# certain score types are assigned a fixed distance
 			if not(info_dict["distance"]):
-				if info_dict["dunk"]:
-					info_dict["distance"] = 0
-				if info_dict["layup"]:
+				if info_dict["touchdown"]:
+					info_dict["distance"] = 6
+				if info_dict["P.A.T"]:
 					info_dict["distance"] = 1
-				if "tip shot" in text:
-					info_dict["distance"] = 1
-				if "three point" in text:
-					info_dict["distance"] = 23
+				if "fieldgoal" in text:
+					info_dict["distance"] = 3
+				if "safety" in text:
+					info_dict["distance"] = 2
 
 	if info_dict["home_or_away"] == "home":
 		info_dict["own_score"] = info_dict["home_score"]
@@ -326,21 +327,22 @@ def filter_game_info(list_info_dicts, home_or_away):
 	for d in list_info_dicts:
 		if d.get("home_or_away") != home_or_away:
 			continue
-		if d["free_throw"]:
+		if d["touchdown"]:
 			continue
-		if d["shot_success"] is None:
+		if d["P.A.T"] is None:
 			continue
 		if "home_score" not in d:
 			continue
 
 		d = {k: d[k] for k in ["text",
-							   "dunk",
-							   "distance",
-							   "game_id",
-							   "points_scored",
-							   "layup",
+							   "touchdown",
+							   "fieldgoal",
+							   "P.A.T",
+							   "safety",
+							   "run",
+							   "catch",
 							   "player",
-							   "shot_success",
+							   "score_success",
 							   "time",
 							   "own_score",
 							   "opponent_score",
@@ -363,7 +365,7 @@ def structure_gamelog_info(game_id,
 	Returns:
 		list of dicts that contain information from the gamelog's rows
 	"""
-	game_link = "http://espn.go.com/nba/playbyplay?gameId=%s&period=0" %(game_id)
+	game_link = "http://espn.go.com/college-football/scoreboard" %(game_id)
 	gamelog = soup_link(game_link) 
 
 	pattern_info = re.compile("(even|odd)") 
