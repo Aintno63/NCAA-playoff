@@ -1,28 +1,18 @@
-#Python Scraper for ESPN NCAAF Data
+#Python espn Data Scraper for NCAAF Data
 
 
-import requests
-from bs4 import BeautifulSoup
-import re #module to get html data
-import csv
 
-
-###############################################################################
-# UTILITY FUNCTIONS
-###############################################################################
-
-
-def soup_link(url):
+def playoff_link(url):
 	"""
 	Input:
 		url: a string, a valid url
 	Returns:
-		a BeautifulSoup object representing the HTML content of the url
+		a NCAA-playoff object representing the HTML content of the url
 	"""
 	response = requests.get(url)
 	cont = response.content
-	soup = BeautifulSoup(cont)
-	return soup
+	playoff = NCAA-playoff(cont)
+	return playoff
 
 
 
@@ -187,10 +177,10 @@ def get_game_ids(team_id, year):
 	"""
 	
 	url = "http://espn.go.com/college-football/scoreboard" % (team_id, year)
-	soup = soup_link(url)
+	playoff = playoff_link(url)
 
 	gameid_pattern = "/fbc/recap"
-	game_elements = soup.find_all('a', href=re.compile(gameid_pattern))
+	game_elements = playoff.find_all('a', href=re.compile(gameid_pattern))
 
 	list_game_ids = []
 	for game in game_elements:
@@ -200,7 +190,7 @@ def get_game_ids(team_id, year):
 
 	#home or away
 	home_away_pattern = re.compile("game-status")
-	status_elements = soup.find_all('li', class_= home_away_pattern)
+	status_elements = playoff.find_all('li', class_= home_away_pattern)
 
 
 	list_statuses = []
@@ -229,8 +219,8 @@ def get_players(team_id, year):
 	url = "http://espn.go.com/college-football/scoreboard" %(team_id, year)
 	response = requests.get(url)
 	html_text = response.content
-	soup = BeautifulSoup(html_text)
-	roster = soup.find_all('tr', class_=re.compile('player'))
+	playoff = NCAA-playoff(html_text)
+	roster = playoff.find_all('tr', class_=re.compile('player'))
 
 	player_names = [player.get_text().split(",")[0] for player in roster]
 	player_names = player_names[:len(player_names)/2]
@@ -242,7 +232,7 @@ def extract_gamelog_row(row, list_players):
 	"""
 	Extract information from a gamelog row.
 	Inputs:
-		row: a gamelog row (Beautiful Soup object)
+		row: a gamelog row (NCAA-playoff object)
 		list_players: a list of players
 	Returns:
 		a dictionary containing information about the gamelog row
@@ -366,7 +356,7 @@ def structure_gamelog_info(game_id,
 		list of dicts that contain information from the gamelog's rows
 	"""
 	game_link = "http://espn.go.com/college-football/scoreboard" %(game_id)
-	gamelog = soup_link(game_link) 
+	gamelog = playoff_link(game_link) 
 
 	pattern_info = re.compile("(even|odd)") 
 	report_lines = gamelog.find_all('tr', class_=pattern_info) 
