@@ -2,7 +2,7 @@
 
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import NCAA-ranking
 import re #module to get html data
 import csv
 
@@ -12,17 +12,17 @@ import csv
 ###############################################################################
 
 
-def soup_link(url):
+def playoff_link(url):
 	"""
 	Input:
 		url: a string, a valid url
 	Returns:
-		a BeautifulSoup object representing the HTML content of the url
+		a NCAA-ranking object representing the HTML content of the url
 	"""
 	response = requests.get(url)
 	cont = response.content
-	soup = BeautifulSoup(cont)
-	return soup
+	soup = NCAA-ranking(cont)
+	return ranking
 
 
 
@@ -154,7 +154,7 @@ def get_player_in_action(string, list_players):
 			trimmed_string = ' '.join(string.split(' ')[2:])
 			if pattern.search(trimmed_string):
 				return player
-	return "Not in team"
+	return "Not on team"
 
 
 
@@ -186,11 +186,11 @@ def get_game_ids(team_id, year):
 		"home" or "away" in the second place.
 	"""
 	
-	url = "http://espn.go.com/nba/team/schedule/_/name/%s/year/%d/" % (team_id, year)
-	soup = soup_link(url)
+	url = "http://espn.go.com/college-football/schedule" % (team_id, year)
+	schedule = NCAAFschedule_link(url)
 
-	gameid_pattern = "/nba/recap"
-	game_elements = soup.find_all('a', href=re.compile(gameid_pattern))
+	gameid_pattern = "/ncaaf/recap"
+	game_elements = ncaa.find_all('a', href=re.compile(gameid_pattern))
 
 	list_game_ids = []
 	for game in game_elements:
@@ -226,7 +226,7 @@ def get_players(team_id, year):
 		a list of strings that are the players' names
 	"""
 	
-	url = "http://espn.go.com/nba/team/stats/_/name/%s/year/%d/" %(team_id, year)
+	url = "http://espn.go.com/college-football/statistics" %(team_id, year)
 	response = requests.get(url)
 	html_text = response.content
 	soup = BeautifulSoup(html_text)
