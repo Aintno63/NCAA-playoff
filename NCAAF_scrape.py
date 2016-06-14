@@ -12,7 +12,7 @@ import csv
 ###############################################################################
 
 
-def playoff_link(url):
+def season_link(url):
 	"""
 	Input:
 		url: a string, a valid url
@@ -21,7 +21,7 @@ def playoff_link(url):
 	"""
 	response = requests.get(url)
 	cont = response.content
-	soup = NCAA-ranking(cont)
+	ncaa = NCAA-ranking(cont)
 	return ranking
 
 
@@ -74,7 +74,7 @@ def is_result(string):
 
 def parse_distance(string):
 	"""
-	Get the distance from a report line. Example: an input "25-foot jumper"
+	Get the distance from a report line. Example: an input "25-yard catch"
 	should result in an output 25 (an integer).
 	Input:
 		string: a string to be analyzed
@@ -82,13 +82,13 @@ def parse_distance(string):
 		if the string contains distance information, return the distance as
 		an integer. else return nothing ("return None")
 	"""
-	pattern_string = "\d\d?-foot" #1 or 2 digits, followed by '-foot'
+	pattern_string = "\d\d?-yards" #1 or 2 digits, followed by '-yards'
 	pattern = re.compile(pattern_string)
 	dd = pattern.search(string)
 	if bool(dd) == True:  
-		dist = map(str, re.findall(r'\d\d?-foot', string)) #Here we subsect the matched pattern
+		dist = map(str, re.findall(r'\d\d?-yards', string)) #Here we subsect the matched pattern
 		dist = ', '.join(dist) # Unlist it 
-		dist = dist.replace("-foot", "") #remove the common trailing string
+		dist = dist.replace("-yards", "") #remove the common trailing string
 		return int(dist) #and return the integer of the valued
 	else:
 		return None
@@ -102,26 +102,30 @@ def parse_points_scored(string):
 	Input:
 		string: a string to be analyzed
 	Returns:
-		1, 2 or 3: how many points were scored
+		6, 1, 2 or 3: how many points were scored
 	"""
-	if "free throw" in string: 
+	if "touchdown" in string: 
+		return 6
+	elif "P.A.T" in string:
 		return 1
-	elif "three point" in string:
+	elif "fieldgoal in string:
 		return 3
-	else:
+	elif "safety" in string:
 		return 2
+	else:
+		return 0
 		
 
 
-def parse_shot_success(string):
+def parse_score_success(string):
     """
-    Determine if the shot was successful.
+    Determine if the score was successful.
 	Input:
 		string: a string to be analyzed
 	Returns:
 		"scores" or "misses" or None (return None) based on
-		the shot success.
-		parse_shot_success
+		the score success.
+		parse_score_success
 	
     """
     if "makes" in string:
@@ -143,7 +147,7 @@ def get_player_in_action(string, list_players):
 			active player
 	Returns:
 		The player in action. If none of the players in list_players was
-		in action, return "Not in team"
+		in action, return "Not on team"
 	"""
 	for player in list_players:
 		begin_pattern = re.compile("^"+player)
@@ -158,9 +162,9 @@ def get_player_in_action(string, list_players):
 
 
 
-def is_shot_type(string, shot_type):
+def is_score_type(string, shot_type):
 	"""
-	If the shot_type is in string, return 1, else 0.
+	If the score_type is in string, return 1, else 0.
 	"""
 	if shot_type in string:
 		return 1
@@ -200,7 +204,7 @@ def get_game_ids(team_id, year):
 
 	#home or away
 	home_away_pattern = re.compile("game-status")
-	status_elements = soup.find_all('li', class_= home_away_pattern)
+	status_elements = NCAAF.find_all('li', class_= home_away_pattern)
 
 
 	list_statuses = []
@@ -229,8 +233,8 @@ def get_players(team_id, year):
 	url = "http://espn.go.com/college-football/statistics" %(team_id, year)
 	response = requests.get(url)
 	html_text = response.content
-	soup = BeautifulSoup(html_text)
-	roster = soup.find_all('tr', class_=re.compile('player'))
+	season = NCAAF-season(html_text)
+	roster = NCAAF.find_all('tr', class_=re.compile('player'))
 
 	player_names = [player.get_text().split(",")[0] for player in roster]
 	player_names = player_names[:len(player_names)/2]
@@ -242,7 +246,7 @@ def extract_gamelog_row(row, list_players):
 	"""
 	Extract information from a gamelog row.
 	Inputs:
-		row: a gamelog row (Beautiful Soup object)
+		row: a gamelog row (NCAAF-playoff object)
 		list_players: a list of players
 	Returns:
 		a dictionary containing information about the gamelog row
@@ -279,28 +283,32 @@ def extract_gamelog_row(row, list_players):
 			info_dict["player"] = get_player_in_action(text, list_players)
 			info_dict["shot_success"] = parse_shot_success(text)
 
-			if info_dict["shot_success"] == "scores":
+			if info_dict["score_success"] == "scores":
 				info_dict["points_scored"] = parse_points_scored(text)
 			else:
 				info_dict["points_scored"] = 0
 
-			info_dict["dunk"] =  is_shot_type(text, "dunk")
-			info_dict["layup"] = is_shot_type(text, "layup")
-			info_dict["free_throw"] = is_shot_type(text, "free_throw")
+			info_dict["touchdown"] =  is_score_type(text, "touchdown")
+			info_dict["fieldgoal"] = is_score_type(text, "fieldgoal")
+			info_dict["P.A.T"] = is_score_type(text, "P.A.T")
+			info_dict["Safety"] = is_score_type(text, "Safety")
 
 			# distance
 			info_dict["distance"] = parse_distance(text)
 
 			# certain shot types are assigned a fixed distance
 			if not(info_dict["distance"]):
-				if info_dict["dunk"]:
-					info_dict["distance"] = 0
-				if info_dict["layup"]:
-					info_dict["distance"] = 1
-				if "tip shot" in text:
-					info_dict["distance"] = 1
-				if "three point" in text:
-					info_dict["distance"] = 23
+				if info_dict["distance"]:
+					info_dict["distance"] = []
+				if info_dict["fieldgoal"]:
+					info_dict["fieldgoal"] = 3
+				if "P.A.T" in text:
+					info_dict["P.A.T"] = 1
+				if "safety" in text:
+					info_dict["safety"] = 2
+				if "touchdown" in text:
+					info_dict["touchdown"] = 6
+
 
 	if info_dict["home_or_away"] == "home":
 		info_dict["own_score"] = info_dict["home_score"]
@@ -326,19 +334,19 @@ def filter_game_info(list_info_dicts, home_or_away):
 	for d in list_info_dicts:
 		if d.get("home_or_away") != home_or_away:
 			continue
-		if d["free_throw"]:
+		if d["fieldgoal"]:
 			continue
-		if d["shot_success"] is None:
+		if d["score_success"] is None:
 			continue
 		if "home_score" not in d:
 			continue
 
 		d = {k: d[k] for k in ["text",
-							   "dunk",
+							   "touchdown",
 							   "distance",
 							   "game_id",
 							   "points_scored",
-							   "layup",
+							   "fieldgoal",
 							   "player",
 							   "shot_success",
 							   "time",
@@ -363,8 +371,8 @@ def structure_gamelog_info(game_id,
 	Returns:
 		list of dicts that contain information from the gamelog's rows
 	"""
-	game_link = "http://espn.go.com/nba/playbyplay?gameId=%s&period=0" %(game_id)
-	gamelog = soup_link(game_link) 
+	game_link = "http://espn.go.com/college-football/scoreboard" %(game_id)
+	gamelog = season_link(game_link) 
 
 	pattern_info = re.compile("(even|odd)") 
 	report_lines = gamelog.find_all('tr', class_=pattern_info) 
