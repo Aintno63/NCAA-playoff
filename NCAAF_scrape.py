@@ -162,11 +162,11 @@ def get_player_in_action(string, list_players):
 
 
 
-def is_score_type(string, shot_type):
+def is_score_type(string, score_type):
 	"""
 	If the score_type is in string, return 1, else 0.
 	"""
-	if shot_type in string:
+	if score_type in string:
 		return 1
 	else:
 		return 0 
@@ -281,7 +281,7 @@ def extract_gamelog_row(row, list_players):
 				info_dict["home_or_away"] = "away"
 
 			info_dict["player"] = get_player_in_action(text, list_players)
-			info_dict["shot_success"] = parse_shot_success(text)
+			info_dict["score_success"] = parse_score_success(text)
 
 			if info_dict["score_success"] == "scores":
 				info_dict["points_scored"] = parse_points_scored(text)
@@ -296,7 +296,7 @@ def extract_gamelog_row(row, list_players):
 			# distance
 			info_dict["distance"] = parse_distance(text)
 
-			# certain shot types are assigned a fixed distance
+			# certain score types are assigned a fixed distance
 			if not(info_dict["distance"]):
 				if info_dict["distance"]:
 					info_dict["distance"] = []
@@ -348,7 +348,7 @@ def filter_game_info(list_info_dicts, home_or_away):
 							   "points_scored",
 							   "fieldgoal",
 							   "player",
-							   "shot_success",
+							   "score_success",
 							   "time",
 							   "own_score",
 							   "opponent_score",
