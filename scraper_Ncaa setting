@@ -1,5 +1,5 @@
 # Select year for parsing
-academic_year = "2014" # Set the academic year (2012 refers to 2011-2012 season). As of writing, this can range from 2010 to 2013.
+academic_year = "2014" # Set the academic year (2012 refers to 2011-2012 season). As of writing, this can range from 2010 to 2016.
 year_index = "11540" # Set the index that maps to the academic year. This may be obtained from looking at the team URLs on the list of available teams, for the given academic year. As of writing, the [academic_year, year_index] mappings are: [2013, 11220], [2012, 10740], [2011, 10440], and [2010, 10260]
 
 
@@ -35,11 +35,11 @@ http_header = {
             "DNT": "1",
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "X-Requested-With": "XMLHttpRequest",
-            "Referer": "http://stats.ncaa.org/team/inst_team_list?sport_code=MBB&division=1",
+            "Referer": "http://stats.ncaa.org/team/inst_team_list?academic_year=2016&conf_id=-1&division=11&sport_code=MFB",
             "Connection": "keep-alive",
             "Pragma": "no-cache",
             "Cache-Control": "no-cache"
             } # Variables from the HTTP header (default)
 
-start_url = 'http://stats.ncaa.org/team/inst_team_list?sport_code=MBB&academic_year=' + str(academic_year) + "&division=1" # URL to start from (Change this for different years). You can get this URL from http://stats.ncaa.org/team/inst_team_list?sport_code=MBB&division=1. This URL is for the 2011-2012 season.
+start_url = 'http://stats.ncaa.org/active_career_leaders/show_summary_from_rankings?academic_year=2016&division=11&sport_code=MFB=' + str(academic_year) + "&division=1" # URL to start from (Change this for different years). You can get this URL from http://stats.ncaa.org/team/inst_team_list?academic_year=2016&conf_id=-1&division=11&sport_code=MFB. This URL is for the 2015-2016 season.
 domain_base = 'http://stats.ncaa.org' # Base domain
