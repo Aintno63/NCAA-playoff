@@ -102,7 +102,7 @@ def parse_points_scored(string):
 	Input:
 		string: a string to be analyzed
 	Returns:
-		6, 1, 2 or 3: how many points were scored
+		6, 1, 3 or 2: how many points were scored
 	"""
 	if "touchdown" in string: 
 		return 6
@@ -128,7 +128,7 @@ def parse_score_success(string):
 		parse_score_success
 	
     """
-    if "makes" in string:
+    if "touchdown" in string:
         return "scores"
     elif "misses" in string:
         return "misses"
@@ -424,7 +424,7 @@ def parse_all_games(team_id, year, outdir):
 # RUN THE SCRAPING
 ###############################################################################
 
-year = 2014
+year = 2016
 DATA_FOLDER = "  "
 list_team_ids = ["por", "bos"]
 
@@ -433,4 +433,4 @@ for team_id in list_team_ids:
 	
 
 
-
+print * def
