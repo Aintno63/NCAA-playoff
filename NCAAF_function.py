@@ -8,7 +8,7 @@ import cookielib
 import urllib
 import urllib2
 import re
-import scrapersettings
+import scraper_Ncaa setting
 
 ### Retry Decorator code taken from the SaltyCrane Blog (http://www.saltycrane.com/blog/2009/11/trying-out-retry-decorator-python/)
 import time
