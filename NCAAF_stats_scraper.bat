@@ -1,6 +1,6 @@
 GOTO EndHeader
 ##############################################################
-
+# Program name: NCAA FB Stats Scraper
 # Usage: Edit the settings file (scrapersettings.py) and simply run this script
 ##############################################################
 :EndHeader
