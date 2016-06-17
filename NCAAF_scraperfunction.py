@@ -10,7 +10,7 @@ import urllib
 import urllib2
 import re
 import scraper_Ncaa setting
-import NCAAF_scrape.py 
+import NCAAF_scraperSetting.py 
 import scraper_Ncaa.txt
 import NCAAF_stats_scraper.bat 
 
