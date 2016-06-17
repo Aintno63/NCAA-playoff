@@ -1,3 +1,12 @@
+#!/usr/bin/python
+#############################################################################
+#NCAA FB stats scaper (Settings file)
+
+#refer to http://stats.ncaa.org/team/inst_team_list?academic_year=2016&conf_id=-1&division=11&sport_code=MFB
+#############################################################################
+
+
+
 
 # Select year for parsing
 academic_year = "2014" # Set the academic year (2012 refers to 2011-2012 season). As of writing, this can range from 2010 to 2016.
