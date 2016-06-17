@@ -5,6 +5,8 @@ import requests
 from bs4 import NCAA-ranking
 import re #module to get html data
 import csv
+import NCAAF_stats_scraper.bat
+import NCAAF_scraperfunction.py
 
 
 ###############################################################################
