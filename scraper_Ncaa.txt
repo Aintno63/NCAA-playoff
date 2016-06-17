@@ -1,7 +1,6 @@
 #Python espn Data Scraper for NCAAF Data
 
 
-
 def playoff_link(url):
 	"""
 	Input:
@@ -32,7 +31,6 @@ def write_list_of_dicts(list_dicts, path):
         for dd in list_dicts:
 		writer.writerow(dd)																						
 																								
-																											
 
 def is_timestamp(string):
 	"""g
