@@ -7,6 +7,7 @@ import re #module to get html data
 import csv
 import NCAAF_stats_scraper.bat
 import NCAAF_scraperfunction.py
+import NCAAF_stats_scrape.py
 
 
 ###############################################################################
