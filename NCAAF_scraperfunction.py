@@ -10,6 +10,11 @@ import urllib
 import urllib2
 import re
 import scraper_Ncaa setting
+import NCAAF_scrape.py 
+import scraper_Ncaa.txt
+import NCAAF_stats_scraper.bat 
+
+
 
 ### Retry Decorator code taken from the SaltyCrane Blog (http://www.saltycrane.com/blog/2009/11/trying-out-retry-decorator-python/)
 import time
