@@ -1,3 +1,7 @@
+#!/bin/bash 
+############################################################## 
+# Program name: NCAA Basketball Stats Scraper 
+
 # Usage: Edit the settings file (scrapersettings.py) and simply run this script
 ##############################################################
 
