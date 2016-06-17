@@ -13,6 +13,7 @@ import scraper_Ncaa setting
 import NCAAF_scraperSetting.py 
 import scraper_Ncaa.txt
 import NCAAF_stats_scraper.bat 
+import README.md
 
 
 
