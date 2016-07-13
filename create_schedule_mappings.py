@@ -8,27 +8,27 @@
 ##############################################################
 
 # Import modules and libraries
-import scraperfunctions
-import scrapersettings
+import scraper_Ncaa_functions
+import scraper_Ncaa_settings
 import csv
 from bs4 import BeautifulSoup
 
-if (scrapersettings.map_schedule == 1):
+if (scraper_Ncaa_settings.map_schedule == 1):
     print "Generating schedule mappings"
     # Create the file headings
-    schedule_mappingfile_w = open(scrapersettings.schedule_mappingfile, "w")
+    schedule_mappingfile_w = open(scraper_Ncaa_settings.schedule_mappingfile, "w")
     schedule_mappingfile_w.writelines("game_id\thome_team_id\taway_team_id\tdate\tneutral_site\tgame_link\n")
 
     # Grab data
     # Parse our mappings file to get our list of teams
-    team_mapping = scraperfunctions.get_team_mappings()
+    team_mapping = scraper_Ncaa_functions.get_team_mappings()
 
     # Create the schedule
     schedule_list = [] # Create an empty list for storing all of our games
     for value, team in enumerate(team_mapping): # For each team in our dictionary
-        if scrapersettings.debugmode == 1: print "Processing team " + str(team) + " (" + str(value+1) + " of " + str(len(team_mapping)) + ")"
+        if scraper_Ncaa_settings.debugmode == 1: print "Processing team " + str(team) + " (" + str(value+1) + " of " + str(len(team_mapping)) + ")"
         try:
-            team_mainpage_data = scraperfunctions.grabber(team_mapping[team][1], scrapersettings.params, scrapersettings.http_header) # Grab the main page for each team
+            team_mainpage_data = scraper_Ncaa_functions.grabber(team_mapping[team][1], scraper_Ncaa_settings.params, scraper_Ncaa_settings.http_header) # Grab the main page for each team
         except:
             print "Error getting data. Moving on to next game."
             continue
@@ -36,7 +36,7 @@ if (scrapersettings.map_schedule == 1):
         gamelinks = [] # Create a blank list for each game
         for link in team_mainpage_data_soup.find_all('a'): # Locate all links in the document
             if "game/index/" in link.get('href'): # If they contain a URL segment suggesting it is a game...
-                game_link = str(scrapersettings.domain_base + link.get('href')).split("?")[0] # Strip out any URL variables since we don't need them
+                game_link = str(scraper_Ncaa_settings.domain_base + link.get('href')).split("?")[0] # Strip out any URL variables since we don't need them
                 try:
                     opponent_id = link.find_previous("td").find_previous("td").find("a").get('href').split("?org_id=")[1]
                 except:
