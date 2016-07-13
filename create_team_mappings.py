@@ -9,10 +9,10 @@
 
 # Import modules and libraries
 import scraper_Ncaa_functions
-import scraper_Ncaa_setting
+import scraper_Ncaa_settings
 from bs4 import BeautifulSoup
 
-if (scraper_Ncaa_settings.map_teams == 1):
+if (scraper_Ncaa_setting.map_teams == 1):
     print "Generating team mappings"
     # Create the file headings
     team_mappingfile_w = open(scraper_Ncaa_settings.team_mappingfile, "w")
