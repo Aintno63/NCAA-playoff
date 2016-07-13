@@ -5,7 +5,7 @@ GOTO EndHeader
 # By: Sean Middleton
 # License: MPL 2.0 (see LICENSE file in root folder)
 # Additional thanks: 
-# Usage: Edit the settings file (scraper_functions.py) and simply run this script
+# Usage: Edit the settings file (scraper_Ncaa_setting.py) and simply run this script
 ##############################################################
 :EndHeader
 
