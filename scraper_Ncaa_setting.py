@@ -1,8 +1,8 @@
 #!/usr/bin/python
 ##############################################################
-# Program name: NCAA Basketball Stats Scraper (Settings file)
+# Program name: NCAA FOOTBALL Stats Scraper (Settings file)
 # Version: 1.0
-# By: Rodrigo Zamith
+# By: Sean Middleton
 # License: MPL 2.0 (see LICENSE file in root folder)
 # Additional thanks: 
 # Refer to http://stats.ncaa.org/team/inst_team_list?sport_code=MBB&division=1 in setting these variables
