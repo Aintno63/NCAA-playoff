@@ -8,42 +8,42 @@
 ##############################################################
 
 # Import modules and libraries
-import scraperfunctions
-import scrapersettings
+import scraper_Ncaa_functions
+import scraper_Ncaa_settings
 import csv
 import re
 from bs4 import BeautifulSoup
 
-if (scrapersettings.map_players == 1):
+if (scraper_Ncaa_settings.map_players == 1):
     # Create the file headings
-    player_mappingfile_w = open(scrapersettings.player_mappingfile, "w")
+    player_mappingfile_w = open(scraper_Ncaa_settings.player_mappingfile, "w")
     player_mappingfile_w.writelines("player_id\tteam_id\tplayer_name\n")
 
-if (scrapersettings.summary_players == 1):
+if (scraper_Ncaa_settings.summary_players == 1):
     # Create the file headings
     summary_player_data_w = open(scrapersettings.summary_player_data, "w")
     summary_player_data_w.writelines("player_id\tplayer_name\tteam_id\tteam_name\tjersey\tyear\tpos\theight\tplayed\tstarted\tminutes\tfgm\tfga\tfgpct\tthree_fgm\tthree_fga\tthree_fgpct\tft\tfta\tftpct\tpts\tptsavg\toffreb\tdefreb\ttotreb\trebavg\tast\tto\tstl\tblk\tfouls\tdbldbl\ttrpdbl\n")
 
-if (scrapersettings.summary_teams == 1):
+if (scraper_Ncaa_settings.summary_teams == 1):
     # Create the file headings
-    summary_team_data_w = open(scrapersettings.summary_team_data, "w")
+    summary_team_data_w = open(scraper_Ncaa_settings.summary_team_data, "w")
     summary_team_data_w.writelines("team_id\tteam_name\tteam_minutes\tteam_fgm\tteam_fga\tteam_fgpct\tteam_three_fgm\tteam_three_fga\tteam_three_fgpct\tteam_ft\tteam_fta\tteam_ftpct\tteam_pts\tteam_ptsavg\tteam_offreb\tteam_defreb\tteam_totreb\tteam_rebavg\tteam_ast\tteam_to\tteam_stl\tteam_blk\tteam_fouls\tteam_dbldbl\tteam_trpdbl\topp_team_minutes\topp_team_fgm\topp_team_fga\topp_team_fgpct\topp_team_three_fgm\topp_team_three_fga\topp_team_three_fgpct\topp_team_ft\topp_team_fta\topp_team_ftpct\topp_team_pts\topp_team_ptsavg\topp_team_offreb\topp_team_defreb\topp_team_totreb\topp_team_rebavg\topp_team_ast\topp_team_to\topp_team_stl\topp_team_blk\topp_team_fouls\topp_team_dbldbl\topp_team_trpdbl\n")
 
 
-if (scrapersettings.map_players == 1) or (scrapersettings.summary_players == 1) or (scrapersettings.summary_teams == 1):
+if (scraper_Ncaa_settings.map_players == 1) or (scraper_Ncaa_settings.summary_players == 1) or (scraper_Ncaa_settings.summary_teams == 1):
     print "Generating player mappings and/or summary data for players and/or summary data for teams"
     # Grab data
     # Parse our mappings file to get our list of teams
-    team_mapping = scraperfunctions.get_team_mappings()
+    team_mapping = scraper_Ncaa_functions.get_team_mappings()
 
     # Parse the stats table
     player_list = [] # Create an empty list for storing all of our players
     team_stats_total = []
     for value, team in enumerate(team_mapping): # For each team in our dictionary
-        if scrapersettings.debugmode == 1: print "Processing team " + str(team) + " (" + str(value+1) + " of " + str(len(team_mapping)) + ")"
-        roster_url = str(scrapersettings.domain_base) + "/team/stats?org_id=" + team + "&sport_year_ctl_id=" + str(scrapersettings.year_index)
+        if scraper_Ncaa_settings.debugmode == 1: print "Processing team " + str(team) + " (" + str(value+1) + " of " + str(len(team_mapping)) + ")"
+        roster_url = str(scraper_Ncaa_settings.domain_base) + "/team/stats?org_id=" + team + "&sport_year_ctl_id=" + str(scraper_Ncaa_settings.year_index)
         team_name = team_mapping[team][0]
-        roster_page_data = scraperfunctions.grabber(roster_url, scrapersettings.params, scrapersettings.http_header) # Grab the main page for each team
+        roster_page_data = scraper_Ncaa_functions.grabber(roster_url, scraper_Ncaa_settings.params, scraper_Ncaa_settings.http_header) # Grab the main page for each team
         roster_page_data_soup = BeautifulSoup(roster_page_data)
         stat_grid = roster_page_data_soup.select('#stat_grid')
 
@@ -83,7 +83,7 @@ if (scrapersettings.map_players == 1) or (scrapersettings.summary_players == 1) 
             trpdbl = str(tds[29].get_text().encode('utf-8').strip())
             indstats = [player_id, name, team, team_name, jersey, year, pos, height, played, started, minutes, fgm, fga, fgpct, three_fgm, three_fga, three_fgpct, ft, fta, ftpct, pts, ptsavg, offreb, defreb, totreb, rebavg, ast, to, stl, blk, fouls, dbldbl, trpdbl]
             player_list.append(indstats)
-            if (scrapersettings.summary_players == 1):
+            if (scraper_Ncaa_settings.summary_players == 1):
                 writeline = ""
                 for item in indstats:
                     writeline += str(item) + "\t"
@@ -147,7 +147,7 @@ if (scrapersettings.map_players == 1) or (scrapersettings.summary_players == 1) 
         opp_team_stats = [opp_team_minutes, opp_team_fgm, opp_team_fga, opp_team_fgpct, opp_team_three_fgm, opp_team_three_fga, opp_team_three_fgpct, opp_team_ft, opp_team_fta, opp_team_ftpct, opp_team_pts, opp_team_ptsavg, opp_team_offreb, opp_team_defreb, opp_team_totreb, opp_team_rebavg, opp_team_ast, opp_team_to, opp_team_stl, opp_team_blk, opp_team_fouls, opp_team_dbldbl, opp_team_trpdbl]
 
         team_stats_total = [team, team_name] + team_stats + opp_team_stats
-        if (scrapersettings.summary_teams == 1):
+        if (scraper_Ncaa_settings.summary_teams == 1):
             writeline = ""
             for item in team_stats_total:
                 writeline += str(item) + "\t"
@@ -157,7 +157,7 @@ if (scrapersettings.map_players == 1) or (scrapersettings.summary_players == 1) 
     print "Successfully generated player mappings and/or summary data for players and/or summary data for teams"
 
 
-if (scrapersettings.map_players == 1):
+if (scraper_Ncaa_settings.map_players == 1):
     player_dict = dict([(case[0], (case[1:])) for case in player_list]) # Create a dictionary from our list so we don't have any duplicate entries
     for item in player_dict: # For each item on that list
         player_mappingfile_w.writelines(str(item) + "\t" + player_dict[item][1] + "\t" + player_dict[item][0] + "\n")
