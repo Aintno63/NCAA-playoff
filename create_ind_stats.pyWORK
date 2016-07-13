@@ -114,66 +114,65 @@ if (scraper_Ncaa_settings.ind_game_stats == 1) or (scraper_Ncaa_settings.ind_pla
             except:
                 pos = "ERROR!"
             try:
-                minutes = str(tds[2].get_text().encode('utf-8').strip())
-                minutes = alphanum.sub('', minutes)
-            except:
-                minutes = "ERROR!"
-            try:
-                fgm = str(tds[3].get_text().encode('utf-8').strip())
-                fgm = alphanum.sub('', fgm)
-            except:
-                fgm = "ERROR!"
-            try:
-                fga = str(tds[4].get_text().encode('utf-8').strip())
-                fga = alphanum.sub('', fga)
-            except:
-                fga = "ERROR!"
-            try:
-                three_fgm = str(tds[5].get_text().encode('utf-8').strip())
-                three_fgm = alphanum.sub('', three_fgm)
-            except:
-                three_fgm = "ERROR!"
-            try:
-                three_fga = str(tds[6].get_text().encode('utf-8').strip())
-                three_fga = alphanum.sub('', three_fga)
-            except:
-                three_fga = "ERROR!"
-            try:
-                ft = str(tds[7].get_text().encode('utf-8').strip())
-                ft = alphanum.sub('', ft)
-            except:
-                ft = "ERROR!"
-            try:
-                fta = str(tds[8].get_text().encode('utf-8').strip())
-                fta = alphanum.sub('', fta)
-            except:
-                fta = "ERROR!"
-            try:
-                pts = str(tds[9].get_text().encode('utf-8').strip())
-                pts = alphanum.sub('', pts)
-            except:
-                pts = "ERROR!"
-            try:
-                offreb = str(tds[10].get_text().encode('utf-8').strip())
-                offreb = alphanum.sub('', offreb)
-            except:
-                offreb = "ERROR!"
-            try:
-                defreb = str(tds[11].get_text().encode('utf-8').strip())
-                defreb = alphanum.sub('', defreb)
-            except:
-                defreb = "ERROR!"
-            try:
-                totreb = str(tds[12].get_text().encode('utf-8').strip())
-                totreb = alphanum.sub('', totreb)
-            except:
-                totreb = "ERROR!"
-            try:
-                ast = str(tds[13].get_text().encode('utf-8').strip())
-                ast = alphanum.sub('', ast)
-            except:
-                ast = "ERROR!"
-            try:
+            passing = str(tds[2].get_text().encode('utf-8').strip())
+            passing = alphanum.sub('', passing)
+        except:
+            passing = "ERROR!"
+        try:
+            rushing = str(tds[3].get_text().encode('utf-8').strip())
+            rushing = alphanum.sub('', rushing)
+        except:
+            rushing = "ERROR!"
+        try:
+            recieving = str(tds[4].get_text().encode('utf-8').strip())
+            recieving = alphanum.sub('', recieving)
+        except:
+            recieving = "ERROR!"
+        try:
+            Touchdowns = str(tds[5].get_text().encode('utf-8').strip())
+            Touchdowns = alphanum.sub('', Touchdowns)
+        except:
+            Touchdowns = "ERROR!"
+        try:
+            Scoring = str(tds[6].get_text().encode('utf-8').strip())
+            Scoring = alphanum.sub('', Scoring)
+        except:
+            Scoring = "ERROR!"
+        try:
+            Total QBR = str(tds[7].get_text().encode('utf-8').strip())
+            Total QBR = alphanum.sub('', Total QBR)
+        except:
+            Total QBR= "ERROR!"
+        try:
+            Sacks = str(tds[8].get_text().encode('utf-8').strip())
+            Sacks = alphanum.sub('', Sacks)
+        except:
+            Sacks = "ERROR!"
+        try:
+            Interceptions = str(tds[9].get_text().encode('utf-8').strip())
+            Interceptions = alphanum.sub('', Interceptions)
+        except:
+            Interceptions = "ERROR!"
+        try:
+            Extra Points = str(tds[10].get_text().encode('utf-8').strip())
+            Extra Points = alphanum.sub('', Extra Points)
+        except:
+            Extra Points = "ERROR!"
+        try:
+             Punting  = str(tds[11].get_text().encode('utf-8').strip())
+             Punting  = alphanum.sub('',  Punting )
+        except:
+             Punting  = "ERROR!"
+        try:
+            Kickoff Returns = str(tds[12].get_text().encode('utf-8').strip())
+            Kickoff Returns = alphanum.sub('', Kickoff Returns)
+        except:
+            Kickoff Returns = "ERROR!"
+        try:
+             Punt Returns  = str(tds[13].get_text().encode('utf-8').strip())
+             Punt Returns  = alphanum.sub('',  Punt Returns )
+        except:
+             Punt Returns  = "ERROR!"
                 to = str(tds[14].get_text().encode('utf-8').strip())
                 to = alphanum.sub('', to)
             except:
@@ -222,66 +221,67 @@ if (scraper_Ncaa_settings.ind_game_stats == 1) or (scraper_Ncaa_settings.ind_pla
                 pos = alphanum.sub('', pos)
             except:
                 pos = "ERROR!"
-            try:
-                minutes = str(tds[2].get_text().encode('utf-8').strip())
-                minutes = alphanum.sub('', minutes)
-            except:
-                minutes = "ERROR!"
-            try:
-                fgm = str(tds[3].get_text().encode('utf-8').strip())
-                fgm = alphanum.sub('', fgm)
-            except:
-                fgm = "ERROR!"
-            try:
-                fga = str(tds[4].get_text().encode('utf-8').strip())
-                fga = alphanum.sub('', fga)
-            except:
-                fga = "ERROR!"
-            try:
-                three_fgm = str(tds[5].get_text().encode('utf-8').strip())
-                three_fgm = alphanum.sub('', three_fgm)
-            except:
-                three_fgm = "ERROR!"
-            try:
-                three_fga = str(tds[6].get_text().encode('utf-8').strip())
-                three_fga = alphanum.sub('', three_fga)
-            except:
-                three_fga = "ERROR!"
-            try:
-                ft = str(tds[7].get_text().encode('utf-8').strip())
-                ft = alphanum.sub('', ft)
-            except:
-                ft = "ERROR!"
-            try:
-                fta = str(tds[8].get_text().encode('utf-8').strip())
-                fta = alphanum.sub('', fta)
-            except:
-                fta = "ERROR!"
-            try:
-                pts = str(tds[9].get_text().encode('utf-8').strip())
-                pts = alphanum.sub('', pts)
-            except:
-                pts = "ERROR!"
-            try:
-                offreb = str(tds[10].get_text().encode('utf-8').strip())
-                offreb = alphanum.sub('', offreb)
-            except:
-                offreb = "ERROR!"
-            try:
-                defreb = str(tds[11].get_text().encode('utf-8').strip())
-                defreb = alphanum.sub('', defreb)
-            except:
-                defreb = "ERROR!"
-            try:
-                totreb = str(tds[12].get_text().encode('utf-8').strip())
-                totreb = alphanum.sub('', totreb)
-            except:
-                totreb = "ERROR!"
-            try:
-                ast = str(tds[13].get_text().encode('utf-8').strip())
-                ast = alphanum.sub('', ast)
-            except:
-                ast = "ERROR!"
+             try:
+            passing = str(tds[2].get_text().encode('utf-8').strip())
+            passing = alphanum.sub('', passing)
+        except:
+            passing = "ERROR!"
+        try:
+            rushing = str(tds[3].get_text().encode('utf-8').strip())
+            rushing = alphanum.sub('', rushing)
+        except:
+            rushing = "ERROR!"
+        try:
+            recieving = str(tds[4].get_text().encode('utf-8').strip())
+            recieving = alphanum.sub('', recieving)
+        except:
+            recieving = "ERROR!"
+        try:
+            Touchdowns = str(tds[5].get_text().encode('utf-8').strip())
+            Touchdowns = alphanum.sub('', Touchdowns)
+        except:
+            Touchdowns = "ERROR!"
+        try:
+            Scoring = str(tds[6].get_text().encode('utf-8').strip())
+            Scoring = alphanum.sub('', Scoring)
+        except:
+            Scoring = "ERROR!"
+        try:
+            Total QBR = str(tds[7].get_text().encode('utf-8').strip())
+            Total QBR = alphanum.sub('', Total QBR)
+        except:
+            Total QBR= "ERROR!"
+        try:
+            Sacks = str(tds[8].get_text().encode('utf-8').strip())
+            Sacks = alphanum.sub('', Sacks)
+        except:
+            Sacks = "ERROR!"
+        try:
+            Interceptions = str(tds[9].get_text().encode('utf-8').strip())
+            Interceptions = alphanum.sub('', Interceptions)
+        except:
+            Interceptions = "ERROR!"
+        try:
+            Extra Points = str(tds[10].get_text().encode('utf-8').strip())
+            Extra Points = alphanum.sub('', Extra Points)
+        except:
+            Extra Points = "ERROR!"
+        try:
+             Punting  = str(tds[11].get_text().encode('utf-8').strip())
+             Punting  = alphanum.sub('',  Punting )
+        except:
+             Punting  = "ERROR!"
+        try:
+            Kickoff Returns = str(tds[12].get_text().encode('utf-8').strip())
+            Kickoff Returns = alphanum.sub('', Kickoff Returns)
+        except:
+            Kickoff Returns = "ERROR!"
+        try:
+             Punt Returns  = str(tds[13].get_text().encode('utf-8').strip())
+             Punt Returns  = alphanum.sub('',  Punt Returns )
+        except:
+             Punt Returns  = "ERROR!"
+             
             try:
                 to = str(tds[14].get_text().encode('utf-8').strip())
                 to = alphanum.sub('', to)
@@ -315,66 +315,66 @@ if (scraper_Ncaa_settings.ind_game_stats == 1) or (scraper_Ncaa_settings.ind_pla
         # Get Away Team Data
         away_results = awaystats.findAll('tr', class_='grey_heading')[-1:]
         tds = away_results[0].findAll('td')
-        try:
-            minutes = str(tds[2].get_text().encode('utf-8').strip())
-            minutes = alphanum.sub('', minutes)
+         try:
+            passing = str(tds[2].get_text().encode('utf-8').strip())
+            passing = alphanum.sub('', passing)
         except:
-            minutes = "ERROR!"
+            passing = "ERROR!"
         try:
-            fgm = str(tds[3].get_text().encode('utf-8').strip())
-            fgm = alphanum.sub('', fgm)
+            rushing = str(tds[3].get_text().encode('utf-8').strip())
+            rushing = alphanum.sub('', rushing)
         except:
-            fgm = "ERROR!"
+            rushing = "ERROR!"
         try:
-            fga = str(tds[4].get_text().encode('utf-8').strip())
-            fga = alphanum.sub('', fga)
+            recieving = str(tds[4].get_text().encode('utf-8').strip())
+            recieving = alphanum.sub('', recieving)
         except:
-            fga = "ERROR!"
+            recieving = "ERROR!"
         try:
-            three_fgm = str(tds[5].get_text().encode('utf-8').strip())
-            three_fgm = alphanum.sub('', three_fgm)
+            Touchdowns = str(tds[5].get_text().encode('utf-8').strip())
+            Touchdowns = alphanum.sub('', Touchdowns)
         except:
-            three_fgm = "ERROR!"
+            Touchdowns = "ERROR!"
         try:
-            three_fga = str(tds[6].get_text().encode('utf-8').strip())
-            three_fga = alphanum.sub('', three_fga)
+            Scoring = str(tds[6].get_text().encode('utf-8').strip())
+            Scoring = alphanum.sub('', Scoring)
         except:
-            three_fga = "ERROR!"
+            Scoring = "ERROR!"
         try:
-            ft = str(tds[7].get_text().encode('utf-8').strip())
-            ft = alphanum.sub('', ft)
+            Total QBR = str(tds[7].get_text().encode('utf-8').strip())
+            Total QBR = alphanum.sub('', Total QBR)
         except:
-            ft = "ERROR!"
+            Total QBR= "ERROR!"
         try:
-            fta = str(tds[8].get_text().encode('utf-8').strip())
-            fta = alphanum.sub('', fta)
+            Sacks = str(tds[8].get_text().encode('utf-8').strip())
+            Sacks = alphanum.sub('', Sacks)
         except:
-            fta = "ERROR!"
+            Sacks = "ERROR!"
         try:
-            pts = str(tds[9].get_text().encode('utf-8').strip())
-            pts = alphanum.sub('', pts)
+            Interceptions = str(tds[9].get_text().encode('utf-8').strip())
+            Interceptions = alphanum.sub('', Interceptions)
         except:
-            pts = "ERROR!"
+            Interceptions = "ERROR!"
         try:
-            offreb = str(tds[10].get_text().encode('utf-8').strip())
-            offreb = alphanum.sub('', offreb)
+            Extra Points = str(tds[10].get_text().encode('utf-8').strip())
+            Extra Points = alphanum.sub('', Extra Points)
         except:
-            offreb = "ERROR!"
+            Extra Points = "ERROR!"
         try:
-            defreb = str(tds[11].get_text().encode('utf-8').strip())
-            defreb = alphanum.sub('', defreb)
+             Punting  = str(tds[11].get_text().encode('utf-8').strip())
+             Punting  = alphanum.sub('',  Punting )
         except:
-            defreb = "ERROR!"
+             Punting  = "ERROR!"
         try:
-            totreb = str(tds[12].get_text().encode('utf-8').strip())
-            totreb = alphanum.sub('', totreb)
+            Kickoff Returns = str(tds[12].get_text().encode('utf-8').strip())
+            Kickoff Returns = alphanum.sub('', Kickoff Returns)
         except:
-            totreb = "ERROR!"
+            Kickoff Returns = "ERROR!"
         try:
-            ast = str(tds[13].get_text().encode('utf-8').strip())
-            ast = alphanum.sub('', ast)
+             Punt Returns  = str(tds[13].get_text().encode('utf-8').strip())
+             Punt Returns  = alphanum.sub('',  Punt Returns )
         except:
-            ast = "ERROR!"
+             Punt Returns  = "ERROR!"
         try:
             to = str(tds[14].get_text().encode('utf-8').strip())
             to = alphanum.sub('', to)
@@ -401,65 +401,65 @@ if (scraper_Ncaa_settings.ind_game_stats == 1) or (scraper_Ncaa_settings.ind_pla
         home_results = homestats.findAll('tr', class_='grey_heading')[-1:]
         tds = home_results[0].findAll('td')
         try:
-            minutes = str(tds[2].get_text().encode('utf-8').strip())
-            minutes = alphanum.sub('', minutes)
+            passing = str(tds[2].get_text().encode('utf-8').strip())
+            passing = alphanum.sub('', passing)
         except:
-            minutes = "ERROR!"
+            passing = "ERROR!"
         try:
-            fgm = str(tds[3].get_text().encode('utf-8').strip())
-            fgm = alphanum.sub('', fgm)
+            rushing = str(tds[3].get_text().encode('utf-8').strip())
+            rushing = alphanum.sub('', rushing)
         except:
-            fgm = "ERROR!"
+            rushing = "ERROR!"
         try:
-            fga = str(tds[4].get_text().encode('utf-8').strip())
-            fga = alphanum.sub('', fga)
+            recieving = str(tds[4].get_text().encode('utf-8').strip())
+            recieving = alphanum.sub('', recieving)
         except:
-            fga = "ERROR!"
+            recieving = "ERROR!"
         try:
-            three_fgm = str(tds[5].get_text().encode('utf-8').strip())
-            three_fgm = alphanum.sub('', three_fgm)
+            Touchdowns = str(tds[5].get_text().encode('utf-8').strip())
+            Touchdowns = alphanum.sub('', Touchdowns)
         except:
-            three_fgm = "ERROR!"
+            Touchdowns = "ERROR!"
         try:
-            three_fga = str(tds[6].get_text().encode('utf-8').strip())
-            three_fga = alphanum.sub('', three_fga)
+            Scoring = str(tds[6].get_text().encode('utf-8').strip())
+            Scoring = alphanum.sub('', Scoring)
         except:
-            three_fga = "ERROR!"
+            Scoring = "ERROR!"
         try:
-            ft = str(tds[7].get_text().encode('utf-8').strip())
-            ft = alphanum.sub('', ft)
+            Total QBR = str(tds[7].get_text().encode('utf-8').strip())
+            Total QBR = alphanum.sub('', Total QBR)
         except:
-            ft = "ERROR!"
+            Total QBR= "ERROR!"
         try:
-            fta = str(tds[8].get_text().encode('utf-8').strip())
-            fta = alphanum.sub('', fta)
+            Sacks = str(tds[8].get_text().encode('utf-8').strip())
+            Sacks = alphanum.sub('', Sacks)
         except:
-            fta = "ERROR!"
+            Sacks = "ERROR!"
         try:
-            pts = str(tds[9].get_text().encode('utf-8').strip())
-            pts = alphanum.sub('', pts)
+            Interceptions = str(tds[9].get_text().encode('utf-8').strip())
+            Interceptions = alphanum.sub('', Interceptions)
         except:
-            pts = "ERROR!"
+            Interceptions = "ERROR!"
         try:
-            offreb = str(tds[10].get_text().encode('utf-8').strip())
-            offreb = alphanum.sub('', offreb)
+            Extra Points = str(tds[10].get_text().encode('utf-8').strip())
+            Extra Points = alphanum.sub('', Extra Points)
         except:
-            offreb = "ERROR!"
+            Extra Points = "ERROR!"
         try:
-            defreb = str(tds[11].get_text().encode('utf-8').strip())
-            defreb = alphanum.sub('', defreb)
+             Punting  = str(tds[11].get_text().encode('utf-8').strip())
+             Punting  = alphanum.sub('',  Punting )
         except:
-            defreb = "ERROR!"
+             Punting  = "ERROR!"
         try:
-            totreb = str(tds[12].get_text().encode('utf-8').strip())
-            totreb = alphanum.sub('', totreb)
+            Kickoff Returns = str(tds[12].get_text().encode('utf-8').strip())
+            Kickoff Returns = alphanum.sub('', Kickoff Returns)
         except:
-            totreb = "ERROR!"
+            Kickoff Returns = "ERROR!"
         try:
-            ast = str(tds[13].get_text().encode('utf-8').strip())
-            ast = alphanum.sub('', ast)
+             Punt Returns  = str(tds[13].get_text().encode('utf-8').strip())
+             Punt Returns  = alphanum.sub('',  Punt Returns )
         except:
-            ast = "ERROR!"
+             Punt Returns  = "ERROR!"
         try:
             to = str(tds[14].get_text().encode('utf-8').strip())
             to = alphanum.sub('', to)
@@ -476,8 +476,8 @@ if (scraper_Ncaa_settings.ind_game_stats == 1) or (scraper_Ncaa_settings.ind_pla
         except:
             blk = "ERROR!"
         try:
-            fouls = str(tds[17].get_text().encode('utf-8').strip())
-            fouls = alphanum.sub('', fouls)
+            flags = str(tds[17].get_text().encode('utf-8').strip())
+            flags = alphanum.sub('', fouls)
         except:
             fouls = "ERROR!"
         home_team_stats = [home_team, home_team_name, minutes, fgm, fga, three_fgm, three_fga, ft, fta, pts, offreb, defreb, totreb, ast, to, stl, blk, fouls]
