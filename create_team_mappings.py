@@ -9,7 +9,7 @@
 
 # Import modules and libraries
 import scraperfunctions
-import scrapersettings
+import scraper_Ncaa_setting.py
 from bs4 import BeautifulSoup
 
 if (scrapersettings.map_teams == 1):
